@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Dictionary;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -13,7 +13,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dictionaries = Dictionary::orderBy('id', 'ASC')->take(10)->get();
-        return view('home', compact('dictionaries'));
+        $users = User::all()->toArray();
+
+        $i = count($users);
+        while ($i > 1) {
+            $i--;
+            $j = rand(0, $i);
+            $this->array_move($users, $j, $i);
+        }
+
+        return view('home', compact('users'));
     }
 }

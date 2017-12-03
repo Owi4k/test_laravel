@@ -10,4 +10,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    function array_move(&$array, $from, $to) {
+        $out = array_splice($array, $from, 1);
+        array_splice($array, $to, 0, $out);
+    }
 }
